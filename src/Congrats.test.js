@@ -1,10 +1,7 @@
 import React from 'react';
 import Enzyme from 'enzyme';
-import EnzymeAdapter from 'enzyme-adapter-react-16'
 import { findByTestAttr, checkProps } from '../test/testUtils'
 import Congrats from './Congrats'
-
-Enzyme.configure({adapter: new EnzymeAdapter() });
 
 const defaultProps = { success: false };
 
@@ -17,7 +14,7 @@ const defaultProps = { success: false };
  */
 const setup = (props={}) => {
   const setupProps = { ... defaultProps, ...props }
-  return Enzyme.shallow(<Congrats {...props} />)
+  return Enzyme.shallow(<Congrats {...setupProps} />)
 }
 
 it('should render without error', () => {
