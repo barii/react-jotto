@@ -1,4 +1,20 @@
-import checkPropTypes from 'check-prop-types'
+import checkPropTypes from 'check-prop-types';
+import { createStore, applyMiddleware } from 'redux';
+
+import rootReducer from '../src/reducers';
+import { middlewares } from '../src/store';
+
+/**
+ * Create a testing store with imported reducers, middleware, and initial state
+ * @param {object} initialStateimport { middlewares } from '../src/store';
+ - Initial state for store
+ * @function storeFactory
+ * @returns {Store} - Redux store 
+ */
+export const storeFactory = (initialState) => {
+  const createStoreWithMiddleware = applyMiddleware(...middlewares)(createStore)
+  return createStoreWithMiddleware(rootReducer, initialState);
+}
 
 /**
  * Returns ShallowWrapper containing node(s) with given data-test value
@@ -9,7 +25,10 @@ import checkPropTypes from 'check-prop-types'
 export const findByTestAttr = (wrapper, val) => {
   return wrapper.find(`[data-test="${val}"]`);
 }
-
+/** Checks if prop tpes are valid for the component
+ * @param  {} component
+ * @param  {} conformingProps
+ */
 export const checkProps = (component, conformingProps) => {
   const propErrors = checkPropTypes(
     component.propTypes,
