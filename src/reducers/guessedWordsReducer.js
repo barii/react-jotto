@@ -14,6 +14,6 @@ export default (state=[], action) => {
         action.payload
       ]
     default:
-      state;
+      return state;
   }
 }

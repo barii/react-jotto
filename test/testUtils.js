@@ -6,8 +6,7 @@ import { middlewares } from '../src/store';
 
 /**
  * Create a testing store with imported reducers, middleware, and initial state
- * @param {object} initialStateimport { middlewares } from '../src/store';
- - Initial state for store
+ * @param {object} initialState - Initial state for store
  * @function storeFactory
  * @returns {Store} - Redux store 
  */

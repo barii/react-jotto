@@ -1,6 +1,5 @@
 import { storeFactory } from '../test/testUtils'
 import { guessWord } from './actions'
-import { getLetterMatchCount } from './helpers/index';
 
 describe('guessWoed action dispatcher', () => {
   const secretWord = 'party';
@@ -20,7 +19,7 @@ describe('guessWoed action dispatcher', () => {
         success: false,
         guessedWords: [{
           guessedWord: unsuccessfulGuess,
-          getLetterMatchCount: 3
+          letterMatchCounts: 3
         }]
       }
       expect(receivedState).toEqual(expectedState);
@@ -31,10 +30,10 @@ describe('guessWoed action dispatcher', () => {
       const receivedState = store.getState();
       const expectedState = {
         ...initialState,
-        success: false,
+        success: true,
         guessedWords: [{
           guessedWord: secretWord,
-          getLetterMatchCount: 5
+          letterMatchCounts: 5
         }]
       }
       expect(receivedState).toEqual(expectedState);
@@ -43,7 +42,12 @@ describe('guessWoed action dispatcher', () => {
   });
 
   describe('some guess words', () => {
-    const guessedWords = [{guessedWord: 'agile', letterMatchCount: 1}];
+    const guessedWords = [
+      { 
+        guessedWord: 'agile', 
+        letterMatchCounts: 1 
+      }
+    ];
     const initialState = {guessedWords, secretWord};
     let store;
     beforeEach(() => {
@@ -58,7 +62,10 @@ describe('guessWoed action dispatcher', () => {
         success: false,
         guessedWords: [
           ...guessedWords, 
-          { guesssedWord: unsuccessfulGuess,getLetterMatchCount: 3 }
+          { 
+            guessedWord: unsuccessfulGuess,
+            letterMatchCounts: 3 
+          }
         ]
       }
       expect(receivedState).toEqual(expectedState);
@@ -72,7 +79,10 @@ describe('guessWoed action dispatcher', () => {
         success: true,
         guessedWords: [
           ...guessedWords, 
-          { guesssedWord: secretWord,getLetterMatchCount: 5 }
+          { 
+            guessedWord: secretWord,
+            letterMatchCounts: 5 
+          }
         ]
       }
       expect(receivedState).toEqual(expectedState);
