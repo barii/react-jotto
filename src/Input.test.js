@@ -1,7 +1,7 @@
 import React from 'react';
 import Enzyme from 'enzyme';
 
-import { findByTestAttr, storeFactory } from '../test/testUtils';
+import { findByTestAttr } from '../test/testUtils';
 import {Input} from './Input';
 
 /**
@@ -11,8 +11,8 @@ import {Input} from './Input';
  * @returns {ShallowWrapper}
  */
 const setup = (initialState={}) => {
-  const store = storeFactory(initialState);
-  const wrapper = Enzyme.shallow(<Input {...initialState}/>);
+  const mockGuessWord = jest.fn();
+  const wrapper = Enzyme.shallow(<Input {...initialState} guessWord={mockGuessWord} />);
   return wrapper;
 } 
 
@@ -66,6 +66,17 @@ describe('render', () => {
 });
 
 describe('Updating the state', () => {
-  
+  it('should have success state as prop', () => {
+    const success = true;
+    const wrapper = setup({ success });
+    const successProp = wrapper.instance().props.success;
+    expect(successProp).toBe(success);
+  });
+
+  it('should have `guessWord` action creator as a function prop', () => {
+    const wrapper = setup();
+    const guessWordProp = wrapper.instance().props.guessWord;
+    //expect(guessWordProp).toBeInstanceOf(Function);
+  });
 });
 
