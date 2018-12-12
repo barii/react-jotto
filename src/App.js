@@ -8,6 +8,9 @@ import { getSecretWord } from './actions'
 import './App.css';
 
 export class App extends Component {
+  componentDidMount() {
+    this.props.getSecretWord();
+  }
   render() {
     return (
       <div className="container">

@@ -1,6 +1,7 @@
 import React from 'react';
 import Enzyme from 'enzyme';
 import { App } from './App';
+import { getServers } from 'dns';
 
 // it('renders without crashing', () => {
 //   const div = document.createElement('div');
@@ -44,4 +45,21 @@ describe('redux properties', () => {
     const getSecretWordProp = wrapper.instance().props.getSecretWord;
     expect(getSecretWordProp).toBeDefined();
   });
+});
+
+it('`getSecretWord` should run on App mount', () => {
+  //set up app component with GetSecretWordMock as the getSecretWord prop
+  const getSecretWord = jest.fn();
+  const wrapper = Enzyme.shallow(<App 
+    success={true} 
+    secretWord='party' 
+    guessedWords={[]}
+    getSecretWord={getSecretWord}
+  />);
+
+  wrapper.instance().componentDidMount();
+
+  const getSecretWordCallCount = getSecretWord.mock.calls.length;
+
+  expect(getSecretWordCallCount).toBe(1)
 });
