@@ -2,8 +2,30 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { guessWord } from './actions';
+import GuessedWords from './GuessedWords';
 
 export class Input extends React.Component {
+  /**
+   * Create ref for input box
+   * @method constructor
+   * @param {object} props - Component props
+   * @returns {undefined} 
+   */
+  constructor(props) {
+    super(props)
+
+    this.inputBox = React.createRef();
+  }
+
+  submitGuessedWord = (e) => {
+    e.preventDefault();
+
+    const guessedWord = this.inputBox.current.value;
+    if(guessWord && guessWord.length > 0) {
+      this.props.guessWord(guessedWord);
+    }
+  }
+
   render() {
     const contents = this.props.success
       ? null
@@ -11,6 +33,7 @@ export class Input extends React.Component {
         <form className='form-inline'>
           <input 
             data-test='input-box' 
+            ref={this.inputBox}
             className='mb-2 mx-sm-3'
             id='word-guess'
             type='text'
@@ -19,7 +42,7 @@ export class Input extends React.Component {
           <button 
             data-test='submit-button'
             className='btn btn-promary mb-2'
-            onClick = {() => guessWord()}
+            onClick = {(e) => this.submitGuessedWord(e)}
             type='submit'>
             Submit
           </button>
@@ -34,8 +57,8 @@ export class Input extends React.Component {
   }
 }
 
-const mapStateToProps = ({success}) => {
-  return {success};
+const mapStateToProps = ({ success }) => {
+  return { success };
 }
 
 export default connect(mapStateToProps, { guessWord })(Input)

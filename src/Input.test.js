@@ -2,7 +2,8 @@ import React from 'react';
 import Enzyme from 'enzyme';
 
 import { findByTestAttr } from '../test/testUtils';
-import {Input} from './Input';
+import { Input } from './Input';
+import GuessedWords from './GuessedWords';
 
 /**
  * Factory function to create ShallowWrapper for the InputComponent component
@@ -80,3 +81,30 @@ describe('Updating the state', () => {
   });
 });
 
+describe('`guessWord` action creator call', () => {
+  let guessWord;
+  let wrapper;
+  let guessedWord = 'train'
+  beforeEach(() => {
+    guessWord = jest.fn();
+
+    wrapper = Enzyme.shallow(<Input guessWord={guessWord} />);
+
+    // add value to the input box
+    wrapper.instance().inputBox.current = { value: guessedWord }
+
+    const submitButton = findByTestAttr(wrapper, 'submit-button');
+    submitButton.simulate('click', {preventDefault() {}});
+  })
+
+  it('should call `guessWord` once when button is clicked', () => {
+    const guessWordCallCount = guessWord.mock.calls.length;
+
+    expect(guessWordCallCount).toBe(1);
+  });
+
+  it('should call `guessWord` with input value in argument', () => {
+    const guessWordArg = guessWord.mock.calls[0][0]; // first time it was called, first argument passed
+    expect(guessWordArg).toBe(guessedWord);
+  });
+});
