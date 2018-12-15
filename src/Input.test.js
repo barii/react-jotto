@@ -84,7 +84,8 @@ describe('Updating the state', () => {
 describe('`guessWord` action creator call', () => {
   let guessWord;
   let wrapper;
-  let guessedWord = 'train'
+  let guessedWord = 'train';
+
   beforeEach(() => {
     guessWord = jest.fn();
 
@@ -106,5 +107,9 @@ describe('`guessWord` action creator call', () => {
   it('should call `guessWord` with input value in argument', () => {
     const guessWordArg = guessWord.mock.calls[0][0]; // first time it was called, first argument passed
     expect(guessWordArg).toBe(guessedWord);
+  });
+
+  it('should clear input box after submit', () => {
+    expect(wrapper.instance().inputBox.current.value).toBe('');  
   });
 });

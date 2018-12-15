@@ -24,6 +24,8 @@ export class Input extends React.Component {
     if(guessWord && guessWord.length > 0) {
       this.props.guessWord(guessedWord);
     }
+
+    this.inputBox.current.value = '';
   }
 
   render() {
