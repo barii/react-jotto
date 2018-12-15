@@ -18,13 +18,13 @@ export const actionTypes = {
 export const guessWord = (guessedWord) => {
   return function(dispatch, getState) {
     const secretWord = getState().secretWord;
-    const letterMatchCounts = getLetterMatchCount(guessedWord, secretWord);
+    const letterMatchCount = getLetterMatchCount(guessedWord, secretWord);
 
     dispatch({
       type: actionTypes.GUESS_WORD,
       payload: {
         guessedWord,
-        letterMatchCounts
+        letterMatchCount
       }
     })
 

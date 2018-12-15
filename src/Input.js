@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { guessWord } from './actions';
-import GuessedWords from './GuessedWords';
 
 export class Input extends React.Component {
   /**
@@ -43,7 +42,7 @@ export class Input extends React.Component {
           />
           <button 
             data-test='submit-button'
-            className='btn btn-promary mb-2'
+            className='btn btn-primary mb-2'
             onClick = {(e) => this.submitGuessedWord(e)}
             type='submit'>
             Submit

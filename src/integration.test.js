@@ -19,7 +19,7 @@ describe('guessWoed action dispatcher', () => {
         success: false,
         guessedWords: [{
           guessedWord: unsuccessfulGuess,
-          letterMatchCounts: 3
+          letterMatchCount: 3
         }]
       }
       expect(receivedState).toEqual(expectedState);
@@ -33,7 +33,7 @@ describe('guessWoed action dispatcher', () => {
         success: true,
         guessedWords: [{
           guessedWord: secretWord,
-          letterMatchCounts: 5
+          letterMatchCount: 5
         }]
       }
       expect(receivedState).toEqual(expectedState);
@@ -45,7 +45,7 @@ describe('guessWoed action dispatcher', () => {
     const guessedWords = [
       { 
         guessedWord: 'agile', 
-        letterMatchCounts: 1 
+        letterMatchCount: 1 
       }
     ];
     const initialState = {guessedWords, secretWord};
@@ -64,7 +64,7 @@ describe('guessWoed action dispatcher', () => {
           ...guessedWords, 
           { 
             guessedWord: unsuccessfulGuess,
-            letterMatchCounts: 3 
+            letterMatchCount: 3 
           }
         ]
       }
@@ -81,7 +81,7 @@ describe('guessWoed action dispatcher', () => {
           ...guessedWords, 
           { 
             guessedWord: secretWord,
-            letterMatchCounts: 5 
+            letterMatchCount: 5 
           }
         ]
       }
