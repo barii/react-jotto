@@ -12,11 +12,11 @@
     "test": "jest --forceExit"
   },
   "devDependencies": {
-    "jest": "^23.6.0"
+    "jest": "^24.8.0"
   },
   "dependencies": {
     "cors": "^2.8.4",
     "express": "^4.16.3",
-    "supertest": "^3.0.0"
+    "supertest": "^4.0.2"
   }
 }
